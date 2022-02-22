@@ -76,6 +76,7 @@ namespace Template_Matching2022_0113
         //加载整个文件夹(2022-0106--end)；
 
         string path = string.Empty;
+        string path1 = string.Empty;
 
 
 
@@ -931,11 +932,17 @@ namespace Template_Matching2022_0113
 
                 //add--修改路径问题（设为本地路径--start）
                 path = "\\Auto-Sigle-Image-Result\\Temp_result";
+                path1 = "\\Auto-Folder-Image-Result\\Temp_result";
                 if (!Directory.Exists(path))
                 {
                     Directory.CreateDirectory(path);
                 }
                 //add--修改路径问题（设为本地路径--end）
+
+                if (!Directory.Exists(path1))
+                {
+                    Directory.CreateDirectory(path1);
+                }
 
                 //(add,2021-1228,在匹配信息Txt文本中添加轮廓面积信息)；
 
@@ -943,6 +950,13 @@ namespace Template_Matching2022_0113
                 #region
                 ////CvInvoke.Imshow("img", temp); //显示图片
                 CvInvoke.Imwrite(path + "\\" + dbf_File2+ "_temp.bmp", temp); //保存匹配结果图像；
+                CvInvoke.WaitKey(0); //暂停按键等待
+                #endregion
+
+                //显示、保存图像；
+                #region
+                ////CvInvoke.Imshow("img", temp); //显示图片
+                CvInvoke.Imwrite(path1 + "\\" + dbf_File2 + "_temp.bmp", temp); //保存匹配结果图像；
                 CvInvoke.WaitKey(0); //暂停按键等待
                 #endregion
 

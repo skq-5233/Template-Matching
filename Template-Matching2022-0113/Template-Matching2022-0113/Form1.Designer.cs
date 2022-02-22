@@ -672,6 +672,7 @@
             this.groupBox4.Controls.Add(this.groupBox6);
             this.groupBox4.Controls.Add(this.label24);
             this.groupBox4.Controls.Add(this.label23);
+            this.groupBox4.Controls.Add(this.label13);
             this.groupBox4.Controls.Add(this.label8);
             this.groupBox4.Controls.Add(this.pictureBox8);
             this.groupBox4.Controls.Add(this.label9);
@@ -698,7 +699,6 @@
             this.groupBox6.Controls.Add(this.label26);
             this.groupBox6.Controls.Add(this.progressBar1);
             this.groupBox6.Controls.Add(this.displab4);
-            this.groupBox6.Controls.Add(this.label13);
             this.groupBox6.Controls.Add(this.displab3);
             this.groupBox6.Font = new System.Drawing.Font("宋体", 12F);
             this.groupBox6.ForeColor = System.Drawing.Color.RoyalBlue;
@@ -730,7 +730,7 @@
             this.displab4.AutoSize = true;
             this.displab4.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.displab4.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.displab4.Location = new System.Drawing.Point(10, 258);
+            this.displab4.Location = new System.Drawing.Point(10, 209);
             this.displab4.Name = "displab4";
             this.displab4.Size = new System.Drawing.Size(82, 20);
             this.displab4.TabIndex = 46;
@@ -742,7 +742,7 @@
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("微软雅黑", 10.5F);
             this.label13.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.label13.Location = new System.Drawing.Point(10, 103);
+            this.label13.Location = new System.Drawing.Point(567, 412);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(79, 20);
             this.label13.TabIndex = 46;
