@@ -188,7 +188,7 @@
             this.uiLabel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             this.uiLabel1.Font = new System.Drawing.Font("微软雅黑", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiLabel1.IsScaled = false;
-            this.uiLabel1.Location = new System.Drawing.Point(350, 0);
+            this.uiLabel1.Location = new System.Drawing.Point(325, 0);
             this.uiLabel1.Name = "uiLabel1";
             this.uiLabel1.Size = new System.Drawing.Size(454, 65);
             this.uiLabel1.Style = Sunny.UI.UIStyle.Custom;
@@ -742,7 +742,7 @@
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("微软雅黑", 10.5F);
             this.label13.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.label13.Location = new System.Drawing.Point(10, 71);
+            this.label13.Location = new System.Drawing.Point(10, 103);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(79, 20);
             this.label13.TabIndex = 46;

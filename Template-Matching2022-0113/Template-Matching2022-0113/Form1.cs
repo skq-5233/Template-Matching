@@ -1656,20 +1656,15 @@ namespace Template_Matching2022_0113
 
                 //progressBar1.Value = 0;  //清空进度条
                 double sumpic = (double)files.Length;
-                progressBar1.Value = (int)((pic / sumpic) * 100);//(work-0216)
-                label26.Text = "当前进度: " + Convert.ToInt32((int)((pic / sumpic) * 100)) + '%' + "\r\n";//(work-0216)
+                //progressBar1.Value = (int)((pic / sumpic) * 100);//(debug-0218--线程间操作无效: 从不是创建控件“progressBar1”的线程访问它。)
+                //label26.Text = "当前进度: " + Convert.ToInt32((int)((pic / sumpic) * 100)) + '%' + "\r\n";//(work-0216)
+
+                //Invoke(2022-0221)
+                Invoke((EventHandler)delegate { progressBar1.Value = (int)((pic / sumpic) * 100); });
+                Invoke((EventHandler)delegate { label26.Text = "当前进度: " + Convert.ToInt32((int)((pic / sumpic) * 100)) + '%' + "\r\n"; });
+
                 Thread.Sleep(50);
-
-                //Invoke((EventHandler)delegate {
-                //    progressBar1.Value = (int)((pic / sumpic) * 100);
-                //});
-                //Invoke((EventHandler)delegate { progressBar1.Refresh(); });
-
-                //Invoke((EventHandler)delegate {
-                //    label26.Text = "当前进度: " + Convert.ToInt32((int)((pic / sumpic) * 100)) + '%' + "\r\n";
-                //});
-                //Invoke((EventHandler)delegate { label26.Refresh(); });
-
+               
 
                 /*
                 *************(设计进度条-2022-0214--end)****************
@@ -1786,8 +1781,8 @@ namespace Template_Matching2022_0113
                 //add--修改路径问题（设为本地路径--end）
 
                 //打印匹配信息（2022-0125,保存文本信息至指定文件夹）；(nextFile.Extension:图像名称；nextfile.FullName：完整路径)
-                displab3.Text = "时间:" + dt1.ToLocalTime().ToString() + "\n" + "图像名称：" + nextfile.Name + "\n" +
-                                "\n" + "匹配信息: X= " +
+                displab3.Text = "时间:" + dt1.ToLocalTime().ToString() + "\n" + "图像名称：" + "\n" +  nextfile.Name + "\n" +
+                                "\n" + "\n" +  "匹配信息: X= " +
                                  max_loc.X + "," + " Y= " + max_loc.Y + ";" +
                                 "\n" +
                                 "最大相似度: " + max.ToString("f2") + ";" + "\n" +

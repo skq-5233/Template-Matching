@@ -35,7 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>as5u5-nqhvc-001.ico</ApplicationIcon>
+    <ApplicationIcon>aan9b-2283v-001.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Emgu.CV.Bitmap">
@@ -155,7 +155,7 @@
     <None Include="Resources\cetc4.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="as5u5-nqhvc-001.ico" />
+    <Content Include="aan9b-2283v-001.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
