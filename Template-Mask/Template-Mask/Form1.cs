@@ -27,9 +27,326 @@ namespace Template_Mask
 {
     public partial class Form1 : Form
     {
+        struct LocRectangle
+        {
+            //public int locIndex;
+            public int x1;
+            public int y1;
+            public int x2;
+            public int y2;
+        }
+
+        private int deleteindexRectangle;
+        private int g_totalRectangle = -1;       //"区域+g_indexRectangle"
+
+        List<LocRectangle> rectangleLocations = new List<LocRectangle>();
+
+        Image<Bgr, byte> temp;
+        Image<Bgr, byte> match_img;
+        Image<Bgr, Byte> match_img1;
+        //Mat convert_img = new Mat();
+
+        double max = 0, min = 0;//创建double极值；
+        Point max_loc = new Point(0, 0), min_loc = new Point(0, 0);//创建dPoint类型，表示极值的坐标；
+
+        string path = string.Empty;
+        string path1 = string.Empty;
+        string dbf_File = string.Empty;
+
         public Form1()
         {
             InitializeComponent();
         }
+
+        private void Add_Area_Click(object sender, EventArgs e)
+        {
+            g_totalRectangle++;
+            comboBox1.Items.Add("区域" + g_totalRectangle.ToString());
+            //int index = this.comboBox1.SelectedIndex;   //当前选中是第几个区域；
+            //首先存储坐标
+            int point_x1 = Convert.ToInt32(textBox1.Text);//实现string类型到int类型的转换;
+            int point_y1 = Convert.ToInt32(textBox2.Text);//实现string类型到int类型的转换;
+            int point_x2 = Convert.ToInt32(textBox4.Text);//实现string类型到int类型的转换;
+            int point_y2 = Convert.ToInt32(textBox3.Text);//实现string类型到int类型的转换;
+
+            //add(2022-0224,point_x>temp.Width,num=temp.Width;point_x<0,point_x=0);
+            if (point_x1 > temp.Width)
+            {
+                point_x1 = temp.Width;
+            }
+            if (point_x1 <= 0)
+            {
+                point_x1 = 0;
+            }
+
+            //add(2022-0224,point_y>temp.Height,point_y=temp.Height;point_y<0,point_y=0);
+            if (point_y1 > temp.Height)
+            {
+                point_y1 = temp.Height;
+            }
+            if (point_y1 <= 0)
+            {
+                point_y1 = 0;
+            }
+
+            //add(2022-0224,point_x>temp.Width,num=temp.Width;point_x<0,point_x=0);
+            if (point_x2 > temp.Width)
+            {
+                point_x2 = temp.Width;
+            }
+            if (point_x2 <= 0)
+            {
+                point_x2 = 0;
+            }
+
+            //add(2022-0224,point_y>temp.Height,point_y=temp.Height;point_y<0,point_y=0);
+            if (point_y2 > temp.Height)
+            {
+                point_y2 = temp.Height;
+            }
+            if (point_y2 <= 0)
+            {
+                point_y2 = 0;
+            }
+
+            LocRectangle locRectangle;
+            //locRectangle.locIndex = g_totalRectangle;   //当前添加的坐标是第几个区域的坐标
+            locRectangle.x1 = point_x1;
+            locRectangle.y1 = point_y1;
+            locRectangle.x2 = point_x2;
+            locRectangle.y2 = point_y2;
+
+            rectangleLocations.Add(locRectangle);   //存储当前四个坐标值
+
+            comboBox2.Items.Add("区域" + g_totalRectangle.ToString());
+        }
+
+        private void Delete_Area_Click(object sender, EventArgs e)
+        {
+            g_totalRectangle--;
+            comboBox2.Items.RemoveAt(deleteindexRectangle);//删除选中区域；
+            comboBox1.Items.RemoveAt(deleteindexRectangle);//删除选中区域；
+            rectangleLocations.RemoveAt(deleteindexRectangle);
+
+        }
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //取坐标、生成框
+            CvInvoke.Rectangle(temp, new Rectangle(new Point(rectangleLocations[this.comboBox1.SelectedIndex].x1, rectangleLocations[this.comboBox1.SelectedIndex].y1), new Size(rectangleLocations[this.comboBox1.SelectedIndex].x2 - rectangleLocations[this.comboBox1.SelectedIndex].x1, rectangleLocations[this.comboBox1.SelectedIndex].y2 - rectangleLocations[this.comboBox1.SelectedIndex].y1)), new MCvScalar(0, 255, 0), 1);//绘制矩形，匹配得到的结果；
+            //CvInvoke.Rectangle(temp, new Rectangle(new Point(rectangleLocations[index].x1, rectangleLocations[index].y1), new Size(100, 100)), new MCvScalar(0, 255, 0), 3);//绘制矩形，匹配得到的结果；
+
+
+
+
+            //创建一矩形，左上角坐标为(80,80)，大小为50*50;                      
+            //CvInvoke.Rectangle(match_img1, new Rectangle(new Point(80, 80), new Size(50, 50)), new MCvScalar(0, 255, 0), 3);//绘制矩形，匹配得到的结果；
+
+            //CvInvoke.Rectangle(match_img1, new Rectangle(max_loc, temp.Size), new MCvScalar(0, 255, 0), 3);//绘制矩形，匹配得到的结果；
+            pictureBox1.Image = temp.ToBitmap();//显示找到模板图像的待搜索图像；
+
+            path = "\\Template-Result\\Match_result";
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            //add--修改路径问题（设为本地路径--end）
+            string dbf_File2 = Path.GetFileNameWithoutExtension(dbf_File); // for getting only MyFile
+
+            //显示、保存图像；
+            //CvInvoke.Imshow("img", temp); //显示图片
+            CvInvoke.Imwrite(path + "\\" + dbf_File2 + "_match_img1.bmp", temp); //保存匹配结果图像(含矩形框)；
+            CvInvoke.WaitKey(0); //暂停按键等待
+
+        }
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            deleteindexRectangle = this.comboBox2.SelectedIndex;   //当前选中是第几个区域
+            MessageBox.Show(this.comboBox2.SelectedIndex.ToString());
+        }
+
+        private void LoadTemplate1_Click(object sender, EventArgs e)
+        {
+            // 加载模板图像；
+            OpenFileDialog OpenFileDialog = new OpenFileDialog();
+            OpenFileDialog.Filter = "JPEG;BMP;PNG;JPG;GIF|*.JPEG;*.BMP;*.PNG;*.JPG;*.GIF|ALL|*.*";//（模板和加载图像尺寸不一致时，会报错）;
+
+
+            if (OpenFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                //(add-2022-0113,获取图像路径--start);
+                dbf_File = OpenFileDialog.FileName;
+                //string dbf_File1 = System.IO.Path.GetFileName(dbf_File);
+
+                string dbf_File2 = Path.GetFileNameWithoutExtension(dbf_File); //得到文件名
+                //(add-2022-0113,获取图像路径--end);
+
+                //string dbf_File2 = System.IO.Path.GetDirectoryName(OpenFileDialog.FileName);//得到路径
+
+                try
+                {
+                    temp = new Image<Bgr, Byte>(OpenFileDialog.FileName);
+                    pictureBox1.Image = temp.ToBitmap();
+
+                }
+                catch (System.Exception ex)
+                {
+                    MessageBox.Show("图像格式错误！");
+                }
+
+                //add--修改路径问题（设为本地路径--start）
+                path = "\\Template-Result\\Temp_result";
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                //add--修改路径问题（设为本地路径--end）
+
+                //显示、保存图像；               
+                CvInvoke.Imwrite(path + "\\" + dbf_File2 + "_temp.bmp", temp); //保存至本地文件夹Result;
+                CvInvoke.WaitKey(0); //暂停按键等待            
+            }
+        }
+
+        private void Matchimage2_Click(object sender, EventArgs e)
+        {
+            // 加载待匹配图像并画出矩形框；
+            OpenFileDialog OpenFileDialog = new OpenFileDialog();
+            OpenFileDialog.Filter = "JPEG;BMP;PNG;JPG;GIF|*.JPEG;*.BMP;*.PNG;*.JPG;*.GIF|ALL|*.*";//（模板和加载图像尺寸不一致时，会报错）;
+
+            //OpenFileDialog.Multiselect = true;//(2021-1231)该值确定是否可以选择多个文件;
+
+            if (OpenFileDialog.ShowDialog() == DialogResult.OK)
+            {
+
+                //string[] files = OpenFileDialog.FileNames;//(2021-1231)该值确定是否可以选择多个文件;
+
+                //(add-2022-0113,获取图像路径--start);
+                dbf_File = OpenFileDialog.FileName;
+                //string dbf_File1 = System.IO.Path.GetFileName(dbf_File);
+
+                string dbf_File2 = Path.GetFileNameWithoutExtension(dbf_File); // for getting only MyFile
+               //(add-2022-0113,获取图像路径--end);
+
+                try
+                {
+                    match_img = new Image<Bgr, Byte>(OpenFileDialog.FileName);
+                    Mat result = new Mat(new Size(match_img.Width - temp.Width + 1, match_img.Height - temp.Height + 1), DepthType.Cv32F, 1);//创建mat存储输出匹配结果；
+                    CvInvoke.MatchTemplate(match_img, temp, result, TemplateMatchingType.CcorrNormed);//采用系数匹配法，数值越大越接近准确图像；
+
+
+                    // 模板与匹配区域差运算匹配方法;
+                    #region 
+                    /*模板与匹配区域差运算；        
+                    Sqdiff = 0(平方差匹配，最好匹配为0)；
+                    SqdiffNormed = 1(归一化平方差匹配，最好结果为0)；
+                    Ccorr = 2(相关匹配法，数值越大效果越好）；
+                    CcorrNormed = 3(归一化相关匹配法，数值越大效果越好）；
+                    Coeff = 4(系数匹配法，数值越大效果越好）；
+                    CoeffNormed = 5(归一化系数匹配法，数值越大效果越好）;*/
+                    #endregion
+
+                    //CvInvoke.Normalize(result, result, 1, 0, Emgu.CV.CvEnum.NormType.MinMax); //对数据进行（min,max;0-255）归一化；
+                    //double max = 0, min = 0;//创建double极值；
+                    //Point max_loc = new Point(0, 0), min_loc = new Point(0, 0);//创建dPoint类型，表示极值的坐标；
+
+                    CvInvoke.MinMaxLoc(result, ref min, ref max, ref min_loc, ref max_loc);//获取极值及其坐标；
+
+                    match_img1 = match_img.Copy(); //将原图match_img复制到match_img1中，对match_img1进行画矩形框，避免pictureBox3显示匹配区域出现边框；
+
+                    //创建一矩形，左上角坐标为(80,80)，大小为40*40
+                    //Rectangle rect = new Rectangle(new Point(80, 80), new Size(40, 40));
+
+                    //利用textBox1自适应调整像素阈值；
+                    int point_x1 = Convert.ToInt32(textBox1.Text);//实现string类型到int类型的转换;
+                    int point_y1 = Convert.ToInt32(textBox2.Text);//实现string类型到int类型的转换;
+                    int point_x2 = Convert.ToInt32(textBox4.Text);//实现string类型到int类型的转换;
+                    int point_y2 = Convert.ToInt32(textBox3.Text);//实现string类型到int类型的转换;
+
+                    //add(2022-0224,point_x>temp.Width,num=temp.Width;point_x<0,point_x=0);
+                    if (point_x1 > temp.Width)
+                    {
+                        point_x1 = temp.Width;
+                    }
+                    if (point_x1 <= 0)
+                    {
+                        point_x1 = 0;
+                    }
+
+                    //add(2022-0224,point_y>temp.Height,point_y=temp.Height;point_y<0,point_y=0);
+                    if (point_y1 > temp.Height)
+                    {
+                        point_y1 = temp.Height;
+                    }
+                    if (point_y1 <= 0)
+                    {
+                        point_y1 = 0;
+                    }
+
+                    //add(2022-0224,point_x>temp.Width,num=temp.Width;point_x<0,point_x=0);
+                    if (point_x2 > temp.Width)
+                    {
+                        point_x2 = temp.Width;
+                    }
+                    if (point_x2 <= 0)
+                    {
+                        point_x2 = 0;
+                    }
+                        
+                    //add(2022-0224,point_y>temp.Height,point_y=temp.Height;point_y<0,point_y=0);
+                    if (point_y2 > temp.Height)
+                    {
+                        point_y2 = temp.Height;
+                    }
+                    if (point_y2 <= 0)
+                    {
+                        point_y2 = 0;
+                    }
+
+                    CvInvoke.Rectangle(match_img1, new Rectangle(new Point(point_x1, point_y1), new Size(point_x2, point_y2)), new MCvScalar(0, 255, 0), 3);//绘制矩形，匹配得到的结果；
+                     //创建一矩形，左上角坐标为(80,80)，大小为50*50;                      
+                    //CvInvoke.Rectangle(match_img1, new Rectangle(new Point(80, 80), new Size(50, 50)), new MCvScalar(0, 255, 0), 3);//绘制矩形，匹配得到的结果；
+
+                    //CvInvoke.Rectangle(match_img1, new Rectangle(max_loc, temp.Size), new MCvScalar(0, 255, 0), 3);//绘制矩形，匹配得到的结果；
+                    pictureBox2.Image = match_img1.ToBitmap();//显示找到模板图像的待搜索图像；
+
+                }
+                catch (System.Exception ex)
+                {
+                    MessageBox.Show("图像格式错误！");
+                }
+
+                //add--修改路径问题（设为本地路径--start）
+                path = "\\Template-Result\\Match_result";
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                //add--修改路径问题（设为本地路径--end）
+
+                //显示、保存图像；
+                #region
+                //CvInvoke.Imshow("img", temp); //显示图片
+                CvInvoke.Imwrite(path + "\\" + dbf_File2 + "_match_img1.bmp", match_img1); //保存匹配结果图像(含矩形框)；
+                CvInvoke.WaitKey(0); //暂停按键等待
+                #endregion
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }
