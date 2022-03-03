@@ -240,7 +240,7 @@ namespace Template_Mask
             }
 
         
-            MessageBox.Show(deleteindexRectangle + "删除成功！");
+            MessageBox.Show("区域"+ deleteindexRectangle + "删除成功！");
             //(0302--当前选中区域)；
             //MessageBox.Show("区域" + this.listBox1.SelectedIndex.ToString());
 
