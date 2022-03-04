@@ -152,7 +152,7 @@
             this.uiButton3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiButton3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiButton3.IsScaled = false;
-            this.uiButton3.Location = new System.Drawing.Point(189, 479);
+            this.uiButton3.Location = new System.Drawing.Point(190, 480);
             this.uiButton3.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiButton3.Name = "uiButton3";
             this.uiButton3.Radius = 10;

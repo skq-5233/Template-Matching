@@ -240,8 +240,9 @@ namespace Template_Mask
                
             }
 
-           
-            MessageBox.Show("区域"+ deleteindexRectangle + "删除成功！");
+            //MessageBox.Show("区域参数" + deleteindexRectangle + "删除成功！");
+            MessageBox.Show("区域删除成功！");
+
             //(0302--当前选中区域)；
             //MessageBox.Show("区域" + this.listBox1.SelectedIndex.ToString());
 
@@ -544,7 +545,8 @@ namespace Template_Mask
             wr.Close();
 
             deleteindexRectangle = this.listBox1.SelectedIndex;   //当前选中是第几个区域
-            MessageBox.Show("区域参数" + +deleteindexRectangle + "保存成功！");
+            //MessageBox.Show("区域参数" + deleteindexRectangle + "保存成功！");
+            MessageBox.Show("区域参数保存成功！");
         }
 
         private void uiButton5_Click(object sender, EventArgs e)
