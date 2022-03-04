@@ -35,7 +35,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.displab = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.uiButton2 = new Sunny.UI.UIButton();
             this.uiButton3 = new Sunny.UI.UIButton();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -49,6 +48,7 @@
             this.uiButton4 = new Sunny.UI.UIButton();
             this.uiButton5 = new Sunny.UI.UIButton();
             this.uiButton6 = new Sunny.UI.UIButton();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -109,7 +109,6 @@
             // 
             this.groupBox2.Controls.Add(this.displab);
             this.groupBox2.Controls.Add(this.listBox1);
-            this.groupBox2.Controls.Add(this.uiButton2);
             this.groupBox2.Controls.Add(this.uiButton3);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label4);
@@ -148,30 +147,16 @@
             this.listBox1.TabIndex = 39;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
-            // uiButton2
-            // 
-            this.uiButton2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiButton2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiButton2.IsScaled = false;
-            this.uiButton2.Location = new System.Drawing.Point(116, 480);
-            this.uiButton2.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiButton2.Name = "uiButton2";
-            this.uiButton2.Radius = 10;
-            this.uiButton2.Size = new System.Drawing.Size(94, 50);
-            this.uiButton2.TabIndex = 33;
-            this.uiButton2.Text = "修改区域";
-            this.uiButton2.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            // 
             // uiButton3
             // 
             this.uiButton3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiButton3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiButton3.IsScaled = false;
-            this.uiButton3.Location = new System.Drawing.Point(227, 480);
+            this.uiButton3.Location = new System.Drawing.Point(189, 479);
             this.uiButton3.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiButton3.Name = "uiButton3";
             this.uiButton3.Radius = 10;
-            this.uiButton3.Size = new System.Drawing.Size(94, 50);
+            this.uiButton3.Size = new System.Drawing.Size(142, 50);
             this.uiButton3.TabIndex = 29;
             this.uiButton3.Text = "删除区域";
             this.uiButton3.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -219,11 +204,11 @@
             this.uiButton1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiButton1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiButton1.IsScaled = false;
-            this.uiButton1.Location = new System.Drawing.Point(5, 480);
+            this.uiButton1.Location = new System.Drawing.Point(18, 479);
             this.uiButton1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiButton1.Name = "uiButton1";
             this.uiButton1.Radius = 10;
-            this.uiButton1.Size = new System.Drawing.Size(94, 50);
+            this.uiButton1.Size = new System.Drawing.Size(142, 50);
             this.uiButton1.TabIndex = 27;
             this.uiButton1.Text = "添加区域";
             this.uiButton1.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -297,7 +282,7 @@
             this.uiButton4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiButton4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiButton4.IsScaled = false;
-            this.uiButton4.Location = new System.Drawing.Point(8, 605);
+            this.uiButton4.Location = new System.Drawing.Point(30, 605);
             this.uiButton4.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiButton4.Name = "uiButton4";
             this.uiButton4.Radius = 10;
@@ -312,7 +297,7 @@
             this.uiButton5.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiButton5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiButton5.IsScaled = false;
-            this.uiButton5.Location = new System.Drawing.Point(192, 605);
+            this.uiButton5.Location = new System.Drawing.Point(202, 605);
             this.uiButton5.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiButton5.Name = "uiButton5";
             this.uiButton5.Radius = 10;
@@ -320,13 +305,14 @@
             this.uiButton5.TabIndex = 34;
             this.uiButton5.Text = "加载区域参数";
             this.uiButton5.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiButton5.Click += new System.EventHandler(this.uiButton5_Click);
             // 
             // uiButton6
             // 
             this.uiButton6.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiButton6.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiButton6.IsScaled = false;
-            this.uiButton6.Location = new System.Drawing.Point(416, 605);
+            this.uiButton6.Location = new System.Drawing.Point(374, 605);
             this.uiButton6.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiButton6.Name = "uiButton6";
             this.uiButton6.Radius = 10;
@@ -340,6 +326,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1008, 729);
             this.Controls.Add(this.uiButton6);
             this.Controls.Add(this.uiButton5);
@@ -375,11 +362,11 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ListBox listBox1;
-        private Sunny.UI.UIButton uiButton2;
         private Sunny.UI.UIButton uiButton5;
         private System.Windows.Forms.Label label1;
         private Sunny.UI.UIButton uiButton6;
         private System.Windows.Forms.Label displab;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }
 

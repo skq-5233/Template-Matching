@@ -59,6 +59,7 @@ namespace Template_Mask
         string path = string.Empty;
         string path1 = string.Empty;
         string dbf_File = string.Empty;
+        String defaultfilepath;
 
         //获取和设置包含该应用程序的目录的名称(0228)
         //获取当前程序运行路径；
@@ -67,10 +68,12 @@ namespace Template_Mask
         public Form1()
         {
             InitializeComponent();
-                       
+            defaultfilepath = "";  //默认文件夹路径；
+
         }
         private void uiButton6_Click(object sender, EventArgs e)
         {
+            //this.Size = new Size(1024, 768);
             form1.Show();//弹出form1;
         }
 
@@ -143,9 +146,7 @@ namespace Template_Mask
            
 
             if (ifListBoxDel == false)
-            {
-                //如何获取余下列表最小索引；               
-
+            {                           
                 //取坐标、生成框(使用match_img图像无法画出多矩形框，仅可画出一个？？0302)
                 CvInvoke.Rectangle(match_img, new Rectangle(new Point(locRectangle.x1, locRectangle.y1), new Size(locRectangle.x2 - locRectangle.x1, locRectangle.y2 - locRectangle.y1)), new MCvScalar(0, 255, 0), 1);//绘制矩形，匹配得到的结果(1：调整矩形粗细)；
                 //CvInvoke.Rectangle(temp, new Rectangle(new Point(rectangleLocations[index].x1, rectangleLocations[index].y1), new Size(100, 100)), new MCvScalar(0, 255, 0), 3);//绘制矩形，匹配得到的结果；               
@@ -239,7 +240,7 @@ namespace Template_Mask
                
             }
 
-        
+           
             MessageBox.Show("区域"+ deleteindexRectangle + "删除成功！");
             //(0302--当前选中区域)；
             //MessageBox.Show("区域" + this.listBox1.SelectedIndex.ToString());
@@ -253,8 +254,6 @@ namespace Template_Mask
             //CvInvoke.Imwrite(path + "\\" + dbf_File2 + "_temp.bmp", temp); //保存匹配结果图像(含矩形框)；
             CvInvoke.Imwrite(path + "\\" + dbf_File2 + "_match_img.bmp", match_img); //保存匹配结果图像(含矩形框)；
             CvInvoke.WaitKey(0); //暂停按键等待
-
-            //rectangleLocations.Sort();   //对列表rectangleLocations进行排序（库里默认的排序结果一般指的是从小到大的排序）;  
 
         }
 
@@ -287,7 +286,7 @@ namespace Template_Mask
 
         //}
 
-       
+
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             //if(ifListBoxDel == false)
@@ -372,11 +371,71 @@ namespace Template_Mask
                 //CvInvoke.Imwrite(path + "\\" + dbf_File2 + "_temp.bmp", temp); //保存匹配结果图像(含矩形框)；
                 CvInvoke.Imwrite(path + "\\" + dbf_File2 + "_match_img.bmp", match_img); //保存匹配结果图像(含矩形框)；
                 CvInvoke.WaitKey(0); //暂停按键等待
+
+
+                //datetime格式化；
+                DateTime dt = DateTime.Now;
+                displab.Text = "时间:" + dt.ToLocalTime().ToString() + "\n" +
+                  "坐标信息: X1=" +
+                  rectangleLocations[this.listBox1.SelectedIndex].x1 + "," + " Y1=" + rectangleLocations[this.listBox1.SelectedIndex].y1 + "; " +
+                  "X2=" + rectangleLocations[this.listBox1.SelectedIndex].x2 + ", " +
+                  "Y2=" + rectangleLocations[this.listBox1.SelectedIndex].y2 + ";" + "\n" + "\n";
+
             }
             else
             {
                 ifListBoxDel = !ifListBoxDel;
             }
+
+            //    ////datetime格式化；
+            //DateTime dt = DateTime.Now;
+            //    displab.Text = "时间:" + dt.ToLocalTime().ToString() + "\n" +
+            //                   "坐标信息: X1=" +
+            //                   textBox1.Text + "," + " Y1=" + textBox4.Text + "; " +
+            //                   "X2=" + textBox2.Text + ", " +
+            //                   "Y2=" + textBox3.Text + ";" + "\n" + "\n";
+
+            //    //（2021-1228,保存文本信息至指定文件夹）；
+            //    string txt = displab.Text;
+
+            //    string filename = path + "\\" + "坐标信息.txt";   //文件名，可以带路径
+
+            //    FileStream fs = new FileStream(filename, FileMode.Append);
+            //    StreamWriter wr = null;
+            //    wr = new StreamWriter(fs);
+
+            //    //System.IO.StreamWriter sw = new System.IO.StreamWriter(filename);
+
+            //    wr.Write(displab.Text);
+            //    wr.Close();
+
+            //    //（2021-1228,保存文本信息至指定文件夹）；
+            //    if (ifListBoxDel == false)
+            //    {
+            //        for (int i = 0; i < rectangleLocations.Count; i++)
+            //        {
+
+            //            if (rectangleLocations[this.listBox1.SelectedIndex].x1 == rectangleLocations[i].x1 &&
+            //               rectangleLocations[this.listBox1.SelectedIndex].y1 == rectangleLocations[i].y1 &&
+            //               rectangleLocations[this.listBox1.SelectedIndex].x2 == rectangleLocations[i].x2 &&
+            //               rectangleLocations[this.listBox1.SelectedIndex].y2 == rectangleLocations[i].y2
+            //                )
+            //            {
+            //displab.Text = "时间:" + dt.ToLocalTime().ToString() + "\n" +
+            //       "坐标信息: X1=" +
+            //       rectangleLocations[this.listBox1.SelectedIndex].x1 + "," + " Y1=" + rectangleLocations[this.listBox1.SelectedIndex].y1 + "; " +
+            //       "X2=" + rectangleLocations[this.listBox1.SelectedIndex].x2 + ", " +
+            //       "Y2=" + rectangleLocations[this.listBox1.SelectedIndex].y2 + ";" + "\n" + "\n";
+            //            }
+
+            //        }
+            //    }
+
+            //    else
+            //    {
+            //        ifListBoxDel = !ifListBoxDel;
+            //    }
+
 
         }
 
@@ -446,7 +505,7 @@ namespace Template_Mask
             //add--修改路径问题（设为本地路径(与.exe同一路径)--end）
 
             ////datetime格式化；
-            DateTime dt = DateTime.Now;
+            //DateTime dt = DateTime.Now;
 
             ////打印匹配信息（2021-1228,保存文本信息至指定文件夹）；
             //displab.Text = "时间:" + dt.ToLocalTime().ToString() + "\n" + "图像名称：" + "\n" + dbf_File2 + "\n" +
@@ -456,11 +515,19 @@ namespace Template_Mask
             //                "最大相似度: " + max.ToString("f2") + ";" + "\n" +
             //                "最小相似度: " + min.ToString("f2") + ";" + "\n" + "\n";
 
+            //displab.Text = "时间:" + dt.ToLocalTime().ToString() + "\n" +
+            //                "坐标信息: X1=" +
+            //                textBox1.Text + "," + " Y1=" + textBox4.Text + "; " +
+            //                "X2=" + textBox2.Text + ", " +
+            //                "Y2=" + textBox3.Text + ";" + "\n" + "\n";
+
+            //datetime格式化；
+            DateTime dt = DateTime.Now;
             displab.Text = "时间:" + dt.ToLocalTime().ToString() + "\n" +
-                            "坐标信息: X1=" +
-                            textBox1.Text + "," + " Y1=" + textBox4.Text + "; " +
-                            "X2=" + textBox2.Text + ", " +
-                            "Y2=" + textBox3.Text + ";" + "\n" + "\n";
+              "坐标信息: X1=" +
+              rectangleLocations[this.listBox1.SelectedIndex].x1 + "," + " Y1=" + rectangleLocations[this.listBox1.SelectedIndex].y1 + "; " +
+              "X2=" + rectangleLocations[this.listBox1.SelectedIndex].x2 + ", " +
+              "Y2=" + rectangleLocations[this.listBox1.SelectedIndex].y2 + ";" + "\n" + "\n";
 
             //（2021-1228,保存文本信息至指定文件夹）；
             string txt = displab.Text;
@@ -475,6 +542,37 @@ namespace Template_Mask
 
             wr.Write(displab.Text);
             wr.Close();
+
+            deleteindexRectangle = this.listBox1.SelectedIndex;   //当前选中是第几个区域
+            MessageBox.Show("区域参数" + +deleteindexRectangle + "保存成功！");
+        }
+
+        private void uiButton5_Click(object sender, EventArgs e)
+        {
+
+            //folderBrowserDialog1.SelectedPath = defaultfilepath; //记忆上次打开文件夹路径(2022-0125)；
+            ////(打开文件夹函数--2022-0106--start)
+            //if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            //{
+            //    defaultfilepath = folderBrowserDialog1.SelectedPath; //记忆上次打开文件夹路径(2022-0125)；
+
+
+            //    //    //thread1 = new Thread(new ThreadStart(ImageProcessingAll));//创建线程(work-0214)
+            //    //    //thread1.Start();//(开启线程--work-0214)
+            //}
+
+            OpenFileDialog filename = new OpenFileDialog(); //定义打开文件
+            filename.InitialDirectory = Application.StartupPath; //初始路径,这里设置的是程序的起始位置，可自由设置
+            filename.Filter = "All files(*.*)|*.*|txt files(*.txt)|*.txt";//设置打开类型,设置个*.*和*.txt就行了
+            filename.FilterIndex = 2;                  //文件类型的显示顺序（上一行.txt设为第二位）
+            filename.RestoreDirectory = true; //对话框记忆之前打开的目录
+            if (filename.ShowDialog() == DialogResult.OK)
+            {
+                listBox1.Text = filename.FileName.ToString();//获得完整路径在listBox1中显示
+                StreamReader sr = new StreamReader(filename.FileName);//将选中的文件在listBox1中显示
+                listBox1.Text = sr.ReadToEnd();
+                sr.Close();
+            }
         }
 
 
