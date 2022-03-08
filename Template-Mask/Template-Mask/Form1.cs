@@ -341,7 +341,7 @@ namespace Template_Mask
                     {
                         //取坐标、生成框(使用match_img图像画出多矩形框)
                         CvInvoke.Rectangle(match_img, new Rectangle(new Point(rectangleLocations[i].x1, rectangleLocations[i].y1), new Size(rectangleLocations[i].x2 - rectangleLocations[i].x1, rectangleLocations[i].y2 - rectangleLocations[i].y1)), new MCvScalar(0, 0, 255), 2);//绘制矩形，匹配得到的结果(1：调整矩形粗细)；
-                                                                                                                                                                                                                                                                                     //CvInvoke.Rectangle(temp, new Rectangle(new Point(rectangleLocations[index].x1, rectangleLocations[index].y1), new Size(100, 100)), new MCvScalar(0, 255, 0), 3);//绘制矩形，匹配得到的结果；               
+                       //CvInvoke.Rectangle(temp, new Rectangle(new Point(rectangleLocations[index].x1, rectangleLocations[index].y1), new Size(100, 100)), new MCvScalar(0, 255, 0), 3);//绘制矩形，匹配得到的结果；               
                     }
 
                     else
