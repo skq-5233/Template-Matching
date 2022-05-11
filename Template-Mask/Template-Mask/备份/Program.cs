@@ -16,7 +16,7 @@ namespace Template_Mask
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Mask_Form1());
+            Application.Run(new Form1());
         }
     }
 }

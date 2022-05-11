@@ -1,6 +1,6 @@
 ﻿namespace Template_Mask
 {
-    partial class Form1
+    partial class Mask_Form1
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -47,7 +47,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.uiButton4 = new Sunny.UI.UIButton();
             this.uiButton5 = new Sunny.UI.UIButton();
-            this.uiButton6 = new Sunny.UI.UIButton();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -307,28 +306,12 @@
             this.uiButton5.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiButton5.Click += new System.EventHandler(this.uiButton5_Click);
             // 
-            // uiButton6
-            // 
-            this.uiButton6.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiButton6.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiButton6.IsScaled = false;
-            this.uiButton6.Location = new System.Drawing.Point(374, 605);
-            this.uiButton6.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiButton6.Name = "uiButton6";
-            this.uiButton6.Radius = 10;
-            this.uiButton6.Size = new System.Drawing.Size(142, 50);
-            this.uiButton6.TabIndex = 35;
-            this.uiButton6.Text = "屏蔽区域设置";
-            this.uiButton6.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiButton6.Click += new System.EventHandler(this.uiButton6_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1008, 729);
-            this.Controls.Add(this.uiButton6);
             this.Controls.Add(this.uiButton5);
             this.Controls.Add(this.uiButton4);
             this.Controls.Add(this.groupBox2);
@@ -364,7 +347,6 @@
         private System.Windows.Forms.ListBox listBox1;
         private Sunny.UI.UIButton uiButton5;
         private System.Windows.Forms.Label label1;
-        private Sunny.UI.UIButton uiButton6;
         private System.Windows.Forms.Label displab;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
